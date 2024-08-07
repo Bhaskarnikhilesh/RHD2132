@@ -8,7 +8,6 @@ uint16_t data;
 uint16_t rxdata;
 uint16_t dummy;
 uint16_t calibrate;
-//uint16_t received_data[10];
 uint16_t data3[10];
 
 
@@ -45,26 +44,6 @@ void SystickDelay_Microsec(uint16_t delay)
 	}
 	SysTick->CTRL = 0;
 }
-
-/*void adxl_write(uint16_t address, uint16_t value){
-	uint16_t data1[2];
-	data1[0] = address | MULTI_BYTE_EN;
-	data1[1] = value;
-	cs_enable();
-	spi_transmit(data1, 2);
-	cs_disable();
-}*/
-
-/*void adxl_read(uint16_t address, uint16_t *rxdata){
-	address |= READ_OPERATION;
-	address |= MULTI_BYTE_EN;
-	cs_enable();
-	spi_transmit(&address, 1);
-	spi1_receive(rxdata,6);
-	cs_disable();
-}*/
-
-
 void spi_gpio_init(void){
 	/*enable clock access to GPIOA AND GPIOB*/
 	RCC->AHBENR |= GPIOAEN;
@@ -171,40 +150,6 @@ uint16_t spi_transmit_receive(uint16_t txdata1){
 
 
 }
-
-
-//void spi_transmit(uint16_t *data){
-//	volatile uint32_t temp;
-    /*wait for until TXE is set*/
-//    while(!(SPI1->SR & (1U<<1))){}
-
-    /*WRITE THE DATA TO THE DATA REGISTER*/
-//    SPI1->DR = *data++;
-
-    /*wait for until TXE is set*/
-//    while(!(SPI1->SR & (1U<<1))){}
-
-    /*WAIT FOR BUSY FLAG TO RESET*/
-
-//    while((SPI1->SR & (1U<<7))){}
-
-    /*CLEAR OVR FLAG*/
-//    temp = SPI1->DR;
-//    temp = SPI1->SR;
-//}
-
-//void spi1_receive(uint16_t *data2, uint16_t size) {
-	//error_led_on();
-//	while(size){
-//	SPI1->DR =0;
-	// Wait for RXNE flag to be set
-//	while (!(SPI1->SR & SPI_SR_RXNE)) {}
-//	*data2++ = (SPI1->DR);
-//	size--;
-//	}
-//}
-
-
 /*uint16_t spi1_receive(void) {
 	// Wait for RXNE flag to be set
 	    while (!(SPI1->SR & SPI_SR_RXNE)) {}
@@ -337,19 +282,19 @@ void adc_init(void) {
 	    write_command(2, REGISTER_2), // Command 3
 	    write_command(3, REGISTER_3), // Command 4
 	    write_command(4, REGISTER_4), // Command 5
-		write_command(5, REGISTER_5),
-		write_command(6, REGISTER_6),
-		write_command(7, REGISTER_7),
-	    write_command(8, REGISTER_8), // Command 6
-	    write_command(9, REGISTER_9), // Command 7
-	    write_command(10, REGISTER_10), // Command 8
-	    write_command(11, REGISTER_11), // Command 9
-	    write_command(12, REGISTER_12), // Command 10
-	    write_command(13, REGISTER_13),  // Command 11
-		write_command(14, REGISTER_14),// Command 12
-		write_command(15, REGISTER_15),// Command 13
-		write_command(16, REGISTER_16),// Command 14
-		write_command(17, REGISTER_17)// Command 15
+	    write_command(5, REGISTER_5), // Command 6
+            write_command(6, REGISTER_6), // Command 7
+            write_command(7, REGISTER_7), // Command 8
+	    write_command(8, REGISTER_8), // Command 9
+	    write_command(9, REGISTER_9), // Command 10
+	    write_command(10, REGISTER_10),// Command 11
+	    write_command(11, REGISTER_11),// Command 12
+	    write_command(12, REGISTER_12),// Command 13
+	    write_command(13, REGISTER_13),// Command 14
+	    write_command(14, REGISTER_14),// Command 15
+	    write_command(15, REGISTER_15),// Command 16
+	    write_command(16, REGISTER_16),// Command 17
+            write_command(17, REGISTER_17)// Command 18
 	};
 
     // Send initial configuration commands

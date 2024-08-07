@@ -24,23 +24,17 @@
 
 int main(void)
 {
-	//uint16_t reading;
-	// Initialize GPIO for SPI
-		 spi_gpio_init();
+	        
+	        // Initialize GPIO for SPI
+		spi_gpio_init();
 		// Configure SPI settings
 		spi_configure();
-		//error_led_init();
-		// Initialize ADXL sensor
-		//spi_transmit_receive(read_command(40));
 		// Initialize UART for DMA transmission
 		uart2_tx_DMA_init();
 
-		//adxl_init();
-	    adc_init();
-		//RHD_Read();
-	   //for(int nice = 0; nice<10; nice++){
-	   //spi_transmit_receive(read_command(40));
-	  //}
+
+	        adc_init();
+		RHD_Read();
 		tim3_20kS_init_interrupt();
 
 

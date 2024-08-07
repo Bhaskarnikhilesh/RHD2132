@@ -92,7 +92,7 @@ void spi_gpio_init(void){
 void spi_configure(void){
 	/*ENABLE CLOCK ACCESS TO SPI1 MODULE*/
 	RCC->APB2ENR |= (1U<<12);
-	/*SET CLOCK TO FPCLK/2 i.e 48Mhz/4 = 12Mhz when we divide 1/12Mhz= 83.33 ns which is specified by RHD2132 Intan datasheet*/
+	/*SET CLOCK TO FPCLK/4 i.e 48Mhz/4 = 12Mhz*/
 	SPI1->CR1 |= (1U<<3);
 	SPI1->CR1 &=~ (1U<<4);
 	SPI1->CR1 &=~ (1U<<5);
@@ -166,13 +166,13 @@ void cs_disable(void){
 	GPIOA->ODR |= (1U<<9);
 }
 
-void tim3_20kS_init_interrupt(void){
+void tim3_30kS_init_interrupt(void){
 
 	/*ENABLE CLOCK ACESS FOR TIMER 3*/
 	RCC->APB1ENR |= TIM3ENR;
 
-	/*SET PRESCALAR VALUE TO 2 BECAUSE 48MHZ/2 = 24MHZ AND
-	 * AUTO RELOAD VALUE TO 50 BECAUSE 24MHZ/1200 = 20KHZ*/
+	/*SET PRESCALAR VALUE TO 2 BECAUSE 48MHZ/4 = 12MHZ AND
+	 * AUTO RELOAD VALUE TO 50 BECAUSE 12MHZ/400 = 30KHZ*/
 	TIM3->PSC = 4-1;
 	TIM3->ARR = 400-1;
 
